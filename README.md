@@ -1,53 +1,82 @@
-# 🚀 Stock Data Intelligence Dashboard
+# 📈 AI-Powered Stock Intelligence Dashboard
 
-## 🧭 Introduction
-This project is a mini financial data platform built to analyze real-time stock market data. It features a robust **FastAPI backend** for data processing and a **responsive frontend dashboard** for visualization.
+A full-stack financial analytics platform that provides real-time stock data, interactive visualizations, and **AI-driven price forecasting**. This project goes beyond basic data fetching by implementing **Ensemble Machine Learning** and **High-Performance Caching** to deliver institutional-grade insights.
 
-Key highlights include automated data cleaning, volatility analysis, and a **Machine Learning (Linear Regression)** model that predicts the next day's closing price.
+![Project Banner](https://via.placeholder.com/1000x400?text=Stock+Intelligence+Dashboard+Preview)
+*(Replace this link with a screenshot of your actual dashboard)*
+
+## 🚀 Key Features
+
+### 📊 Professional Visualization
+* **Live "Day Trading" Mode (1D):** Switches to minute-by-minute intraday data ticks for real-time market monitoring.
+* **Interactive History:** Zoomable ApexCharts for 1M, 1Y, 5Y, and MAX timeframes.
+* **Smart Formatting:** Automatically formats large figures (e.g., "₹1,500 Cr") and uses dynamic color-coding (Green/Red) for profit/loss visibility.
+
+### 🧠 Advanced AI Engine
+* **Ensemble Learning:** Uses a weighted combination of **Linear Regression** (for trend analysis) and **Random Forest** (for non-linear pattern recognition) to predict the next day's closing price.
+* **Risk Analysis:** Automated volatility scoring system that classifies stocks as "Stable" or "High Risk" based on standard deviation thresholds.
+
+### ⚡ Performance Engineering
+* **Smart Caching System:** Implements server-side caching to serve frequently requested data instantly (0ms latency), resolving the common "double-click" loading issue.
+* **Data Downsampling:** Optimizes "MAX" charts (20+ years of data) by downsampling daily ticks to weekly intervals, reducing payload size by **80%** without losing trend accuracy.
+* **Auto-Retry Logic:** Robust backend that handles external API failures gracefully by retrying connections before returning errors.
+
+---
 
 ## 🛠️ Tech Stack
-* **Language:** Python 3.9+
-* **Backend:** FastAPI, Uvicorn
-* **Data Processing:** Pandas, NumPy, yfinance
-* **Data Visualization:** Matplotlib
-* **Machine Learning:** Scikit-learn (Linear Regression)
-* **Frontend:** HTML5, CSS3, JavaScript 
 
-## ✨ Key Features
-1.  **Real-Time Data Collection:** Fetches live data from NSE via `yfinance`.
-2.  **Smart Metrics:** Calculates 7-Day Moving Averages, 52-Week High/Low, and Daily Returns.
-3.  **Volatility Analysis:** Computes a custom "Volatility Score" based on standard deviation to assess risk.
-4.  **AI Price Prediction:** Uses a Linear Regression model trained on the last 30 days to predict tomorrow's price.
-5.  **Interactive Dashboard:** A clean UI to view charts and summaries instantly.
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3 (Glassmorphism), JavaScript (ES6+), ApexCharts.js |
+| **Backend** | Python 3.10+, FastAPI (Asynchronous High-Performance API) |
+| **ML & Data** | Pandas, NumPy, Scikit-Learn (RandomForest, LinearRegression) |
+| **Persistence** | SQLite3 (Local History Backup) |
+| **Data Source** | Yahoo Finance (yfinance) |
 
-## 📦 Installation & Setup
+---
 
-### 1. Prerequisites
-Ensure you have Python installed. Clone this repository or extract the files.
+## ⚙️ Installation & Setup
+
+Follow these steps to run the project locally.
+
+### 1. Clone the Repository
 ```bash
-    pip install - Requirement.txt
+git clone [https://github.com/your-username/stock-dashboard.git](https://github.com/your-username/stock-dashboard.git)
+cd stock-dashboard
 ```
-### 2. Install Dependencies
-Open your terminal in the project folder and run or in Vs code terminal: 
+### 2.Create a Virtual Environment (Optional but Recommended)(Python must be installed)
+```
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Mac/Linux
+source venv/bin/activate
+```
+### 3. Install Dependencies
+```bash
+   pip install -r requirements.txt
+```
+### 4.Run the Server
+ Start the FastAPI backend
+```bash
+uvicorn main:app --reload
+```
+### 5.Launch the Dashboard
+Open your browser and navigate to: http://127.0.0.1:8000/static/index.html(Or simply open the index.html file directly in your browser)
 
-### 3. Run The Backend Server
-* **FastAPI Server :
-       uvicorn main:app --reload
-       API will be live at : http://127.0.0.1:8000
-* **Swagger Documentation which Help in checking if All api working***
-       Swagger Documentation will be live at : http://127.0.0.1:8000/docs
-### 4. Launch the Dashboard
-   simply double-click index.html to open it in your browser
-   will be live at : http://localhost:5500
+# 📂 Project Structure
+stock-dashboard/
+├── main.py              # API Gateway & Route Logic
+├── data_engine.py       # Core Logic: Caching, AI Models, Data Fetching
+├── database.py          # SQLite persistence layer
+├── index.html           # Frontend Dashboard (Single Page App)
+├── requirements.txt     # Python Dependencies
+└── stocks.db            # Local Database (Auto-generated)
+# 📸 Screenshots
+1.Interactive Dashboard(Live 1d View)
+2.AI Predictions & Risk Analysis
+3. Comparison Tool
 
-### 📂 Project Structure
- 1.main.py: The entry point for the FastAPI server and REST endpoints.
- 2.data_engine.py: Handles data fetching, cleaning, logic, and ML model training.
- 3.Frontend/index.html: The frontend visualization dashboard. 
- 4.requirements.txt: List of Python dependencies.
+# 📬 Contact
+Anurag Ray Data Analyst & Full Stack Developer |anurag-rai-403037245 |anuragrai2580@gamil.com |
 
-### 🧠 Logic & Insights
----Data Cleaning --: Used forward-fill (ffill) to handle missing trading days (e.g., holidays) to ensure continuous time-series data.
----Volatility Score --: Calculated as the rolling standard deviation of the last 7 days. A higher score indicates higher risk/instability.
----ML Model --: The prediction engine uses a simple Linear Regression on the "Close" price of the last 30 days to project the trend for day +1.
- 
