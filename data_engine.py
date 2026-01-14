@@ -9,7 +9,7 @@ from database import save_data_to_db
 class StockDataEngine:
     def __init__(self):
         self.cache = {} 
-        self.CACHE_DURATION = 600 # 10 Minutes Cache
+        self.CACHE_DURATION = 600 # Cache (10 minutes load)
 
     def get_processed_data(self, ticker):
         # 1. Check Cache first (Instant load)
@@ -33,7 +33,7 @@ class StockDataEngine:
                     time.sleep(1)
                     continue
 
-                # Clean MultiIndex (Fix for new yfinance versions)
+                # Clean MultiIndex
                 if isinstance(df.columns, pd.MultiIndex):
                     df.columns = df.columns.get_level_values(0)
                 
@@ -69,6 +69,43 @@ class StockDataEngine:
 
         # Only returns None if 5 attempts (5 seconds) fail completely
         return None
+    def get_technical_insight(self, ticker):
+        """Generates a professional text summary based on technical indicators."""
+        df = self.get_processed_data(ticker)
+        if df is None: return "Data unavailable for analysis."
+        
+        last_close = df['Close'].iloc[-1]
+        prev_close = df['Close'].iloc[-2]
+        
+        # 1. Calculate RSI (Relative Strength Index)
+        delta = df['Close'].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs)).iloc[-1]
+        
+        # 2. Calculate SMA (Simple Moving Average)
+        sma_50 = df['Close'].rolling(window=50).mean().iloc[-1]
+        sma_200 = df['Close'].rolling(window=200).mean().iloc[-1]
+        
+        # 3. Generate "Human-Like" Insight
+        insight = f"<b>{ticker} Analysis:</b> The stock closed at <b>₹{round(last_close, 2)}</b>. "
+        
+        # Trend Logic
+        if last_close > sma_50:
+            insight += "It is trading <b>above</b> its 50-day moving average, indicating a <b>Bullish (Upward) trend</b>. "
+        else:
+            insight += "It is trading <b>below</b> its 50-day moving average, indicating a <b>Bearish (Downward) trend</b>. "
+            
+        # RSI Logic
+        if rsi > 70:
+            insight += f"However, the RSI is <b>{round(rsi)}</b>, which suggests the stock is <b>Overbought</b> and might see a correction soon."
+        elif rsi < 30:
+            insight += f"The RSI is <b>{round(rsi)}</b>, suggesting the stock is <b>Oversold</b> and could be undervalued."
+        else:
+            insight += f"The RSI is stable at <b>{round(rsi)}</b>, showing balanced buying and selling momentum."
+
+        return insight
 
     def predict_next_day(self, ticker):
         """Ensemble AI: Linear Regression + Random Forest"""
