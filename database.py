@@ -23,13 +23,13 @@ def init_db():
 
 def save_data_to_db(ticker, df):
     conn = sqlite3.connect(DB_NAME)
-    # Ensure date is a column, not index
+    # Storing data in column
     data = df.copy()
     data.reset_index(inplace=True)
     data['Date'] = data['Date'].astype(str)
     data['ticker'] = ticker
     
-    # Save only relevant columns
+    # Save only columns WE need
     cols = ['ticker', 'Date', 'Open', 'High', 'Low', 'Close', 'Volume']
     data = data[cols]
     data.columns = ['ticker', 'date', 'open', 'high', 'low', 'close', 'volume']
