@@ -44,7 +44,7 @@ Follow these steps to run the project locally.
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/anurag2580/Stock-Data-Intelligence-Dashboard.git]
+git clone https://github.com/anurag2580/Stock-Data-Intelligence-Dashboard.git
 cd stock-intelligence-dashboard
 
 ### 2. 📂 Create a Virtual Environment (Optional but Recommended)
