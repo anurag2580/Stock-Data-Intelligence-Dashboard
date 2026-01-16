@@ -1,5 +1,5 @@
 
-const API = "http://127.0.0.1:8000";
+const API = ""; //
 let currentSymbol = "";
 let currentRange = "1M";
 let chartInstance = null;
