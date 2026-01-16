@@ -2,21 +2,6 @@
 A full-stack financial analytics platform that provides real-time stock data, interactive visualizations, and **AI-driven price forecasting**. This project goes beyond basic data fetching by implementing **Ensemble Machine Learning** and **High-Performance Caching** to deliver institutional-grade insights.
 
 ![Project Banner](https://via.placeholder.com/1000x400?text=Stock+Intelligence+Dashboard+Preview)
-
-
-## 🚀 Key Features
-
-### 📊 Advanced Visualization
-- **Real-Time Intraday Charts:** "Day Trading" mode (1D) with minute-by-minute updates.
-- **Interactive History:** Zoomable charts for 1M, 1Y, 5Y, and MAX timeframes using **ApexCharts**.
-- **Multi-Chart Support:** Toggle seamlessly between Area, Line, and Candlestick views.
-- **Smart Formatting:** Automatic currency conversion (e.g., ₹1,500 Cr) and dynamic color-coding (Green/Red) based on market trends.
-- 
-### ♐ Architecture
-- **Smart Caching Layer:** Custom server-side caching prevents redundant API calls, reducing load times to near-zero for frequently accessed assets.
-- **Robust Data Engine:** Auto-retry logic and background data persistence using **SQLite** ensure 99.9% uptime even if external APIs glitch.
-- **Comparison Tool:** Head-to-head stock performance analysis algorithm.
-
 ### 🏗️ System Architecture
 ```mermaid
 graph TD
@@ -69,6 +54,21 @@ graph TD
     style Models fill:#cfc,stroke:#333
     style Yahoo fill:#ff9,stroke:#333
 ```
+
+
+## 🚀 Key Features
+
+### 📊 Advanced Visualization
+- **Real-Time Intraday Charts:** "Day Trading" mode (1D) with minute-by-minute updates.
+- **Interactive History:** Zoomable charts for 1M, 1Y, 5Y, and MAX timeframes using **ApexCharts**.
+- **Multi-Chart Support:** Toggle seamlessly between Area, Line, and Candlestick views.
+- **Smart Formatting:** Automatic currency conversion (e.g., ₹1,500 Cr) and dynamic color-coding (Green/Red) based on market trends.
+- 
+### ♐ Architecture
+- **Smart Caching Layer:** Custom server-side caching prevents redundant API calls, reducing load times to near-zero for frequently accessed assets.
+- **Robust Data Engine:** Auto-retry logic and background data persistence using **SQLite** ensure 99.9% uptime even if external APIs glitch.
+- **Comparison Tool:** Head-to-head stock performance analysis algorithm.
+  
 ### 🧠 Advanced AI and Machine learning Engine
 * **Ensemble Learning:** Uses a weighted combination of **Linear Regression** (for trend analysis) and **Random Forest** (for non-linear pattern recognition) to predict the next day's closing price.
 * **Risk Analysis:** Automated volatility scoring system that classifies stocks as "Stable" or "High Risk" based on standard deviation thresholds.
