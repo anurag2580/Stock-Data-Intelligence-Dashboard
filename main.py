@@ -1,10 +1,15 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware,FileResponse,StaticFiles
 from data_engine import StockDataEngine
 import yfinance as yf
 import pandas as pd
 
 app = FastAPI()
+
+# --- THIS SERVE THE DASHBOARD ACCESSIBLE AT "/" ---
+@app.get("/")
+async def read_index():
+    return FileResponse('frontend/index.html')
 
 # --- ALLOW FRONTEND TO CONNECT (CORS CONFIG) ---
 app.add_middleware(
