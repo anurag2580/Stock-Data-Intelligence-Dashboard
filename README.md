@@ -16,7 +16,7 @@ graph TD
         
         subgraph "Backend Core"
             FastAPI[⚡ FastAPI Server]
-            Static[📂 Static File Server(HTML/CSS/JS)]
+            Static["📂 Static File Server(HTML/CSS/JS)"]
             Engine[⚙️ Data Engine]
             Cache[🚀 Smart Cache]
         end
