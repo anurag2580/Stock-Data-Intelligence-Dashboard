@@ -16,7 +16,59 @@ A full-stack financial analytics platform that provides real-time stock data, in
 - **Smart Caching Layer:** Custom server-side caching prevents redundant API calls, reducing load times to near-zero for frequently accessed assets.
 - **Robust Data Engine:** Auto-retry logic and background data persistence using **SQLite** ensure 99.9% uptime even if external APIs glitch.
 - **Comparison Tool:** Head-to-head stock performance analysis algorithm.
-- 
+
+### 🏗️ System Architecture
+```mermaid
+graph TD
+    %% User Layer
+    User((👤 User))
+    Browser[📱 Web Browser<br/>(Dashboard UI)]
+
+    %% Cloud / Deployment Layer
+    subgraph "☁️ Render Cloud (Docker Container)"
+        style Docker fill:#e1f5fe,stroke:#01579b,stroke-dasharray: 5 5
+        Docker[🐳 Docker Container]
+        
+        subgraph "Backend Core"
+            FastAPI[⚡ FastAPI Server]
+            Static[📂 Static File Server<br/>(HTML/CSS/JS)]
+            Engine[⚙️ Data Engine]
+            Cache[🚀 Smart Cache]
+        end
+        
+        subgraph "AI Logic"
+            Models[🤖 AI Models<br/>(RandomForest + LinReg)]
+            Analyst[📝 Smart Analyst<br/>(RSI/SMA Logic)]
+        end
+        
+        DB[(🗄️ SQLite DB)]
+    end
+
+    %% External Layer
+    Yahoo[☁️ Yahoo Finance API]
+
+    %% Connections
+    User -->|Visits URL| Browser
+    Browser -->|1. Load UI| Static
+    Browser -->|2. Fetch JSON| FastAPI
+    
+    FastAPI --> Engine
+    Engine --> Cache
+    
+    Cache -- Miss --> Yahoo
+    Yahoo -->|3. Download Data| Engine
+    Engine -->|4. Save| DB
+    
+    Engine --> Models & Analyst
+    Models & Analyst -->|5. Insight| FastAPI
+    FastAPI -->|6. Response| Browser
+
+    %% Styling
+    style FastAPI fill:#bbf,stroke:#333
+    style Engine fill:#bbf,stroke:#333
+    style Models fill:#cfc,stroke:#333
+    style Yahoo fill:#ff9,stroke:#333
+```
 ### 🧠 Advanced AI and Machine learning Engine
 * **Ensemble Learning:** Uses a weighted combination of **Linear Regression** (for trend analysis) and **Random Forest** (for non-linear pattern recognition) to predict the next day's closing price.
 * **Risk Analysis:** Automated volatility scoring system that classifies stocks as "Stable" or "High Risk" based on standard deviation thresholds.
