@@ -1,16 +1,12 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware,FileResponse,StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from data_engine import StockDataEngine
 import yfinance as yf
 import pandas as pd
 
 app = FastAPI()
-
-# --- THIS SERVE THE DASHBOARD ACCESSIBLE AT "/" ---
-@app.get("/")
-async def read_index():
-    return FileResponse('frontend/index.html')
-
 # --- ALLOW FRONTEND TO CONNECT (CORS CONFIG) ---
 app.add_middleware(
     CORSMiddleware,
@@ -18,6 +14,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# --- INITIALIZE DATA ENGINE ---
 engine = StockDataEngine()
 # --- COMPANY LIST ---
 COMPANIES = {
@@ -26,6 +23,16 @@ COMPANIES = {
     "SBIN": "SBIN.NS", "ICICIBANK": "ICICIBANK.NS", "ITC": "ITC.NS",
     "ADANIENT": "ADANIENT.NS", "BAJFINANCE": "BAJFINANCE.NS"
 }
+# --- SERVE FRONTEND FILES ---
+# Mount static files (CSS, JS, images)
+
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+# --- THIS SERVE THE DASHBOARD ACCESSIBLE AT "/"  ---
+@app.get("/")
+async def read_frontend():
+    return FileResponse('frontend/Stock_data_dashboard.html')
+
 # --- API ENDPOINTS ---
 @app.get("/companies")
 def get_companies():
