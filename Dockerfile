@@ -1,5 +1,5 @@
 # python 
-FROM python:3.9-slim
+FROM python:3.10-slim
 # set working directory
 WORKDIR /app
 # copy requirements file
