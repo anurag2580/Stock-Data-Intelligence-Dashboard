@@ -1,0 +1,6 @@
+__pycache__
+venv/
+.git/
+.vscode/
+stocks.db
+*.pyc
