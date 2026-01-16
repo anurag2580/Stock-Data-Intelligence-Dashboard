@@ -7,7 +7,7 @@ A full-stack financial analytics platform that provides real-time stock data, in
 graph TD
     %% User Layer
     User((👤 User))
-    Browser[📱 Web Browser<br/>(Dashboard UI)]
+    Browser[📱 Web Browser(Dashboard UI)]
 
     %% Cloud / Deployment Layer
     subgraph "☁️ Render Cloud (Docker Container)"
