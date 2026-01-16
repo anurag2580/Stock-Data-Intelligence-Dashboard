@@ -7,7 +7,7 @@ A full-stack financial analytics platform that provides real-time stock data, in
 graph TD
     %% User Layer
     User((👤 User))
-    Browser[(📱 Web Browser-Dashboard UI)]
+    Browser["📱 Web Browser (Dashboard UI)"]
 
     %% Cloud / Deployment Layer
     subgraph "☁️ Render Cloud (Docker Container)"
@@ -22,8 +22,8 @@ graph TD
         end
         
         subgraph "AI Logic"
-            Models[🤖 AI Models<br/>(RandomForest + LinReg)]
-            Analyst[📝 Smart Analyst<br/>(RSI/SMA Logic)]
+            Models["🤖 AI Models (RandomForest + LinReg) "]
+            Analyst["📝 Smart Analyst<br/>(RSI/SMA Logic)"]
         end
         
         DB[(🗄️ SQLite DB)]
